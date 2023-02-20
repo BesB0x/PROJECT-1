@@ -30,10 +30,10 @@ function init() {
   }
 
   createGrid()
-  
+
 
   // Player starting position
-  const playerStart = [94]
+  const playerStart = 94
   let playerPosition = playerStart
   addPlayer(playerStart)
 
@@ -74,14 +74,14 @@ function init() {
 
     removePlayer(playerPosition)
 
-    if (e.keyCode === 39 && playerRight(playerPosition) === false ) {
+    if (e.keyCode === 39 && playerRight(playerPosition) === false) {
       console.log('right')
       playerPosition++
-      
+
     } else if (e.keyCode === 37 && playerLeft(playerPosition) === false) {
       console.log('left')
-      playerPosition --
-      
+      playerPosition--
+
     } else {
       console.log('nope')
     }
@@ -97,37 +97,52 @@ function init() {
 
 
   // Element
-  const rocketStartPosition = parseInt(playerPosition) - parseInt(width)
-  let rocketCurrentPosition 
+
+
   let rocketFlies
+  let rocketCurrentPosition
+
   // Execution
-  function addRocket (position) {
+  function addRocket(position) {
     cells[position].classList.add('rocket')
   }
-  function removeRocket (position) {
+  function removeRocket(position) {
     cells[position].classList.remove('rocket')
   }
-  
-  function rocketFired(e) {
-    if (e.keyCode === 32) {
-      rocketCurrentPosition = rocketStartPosition 
-      console.log('rocket start' ,rocketStartPosition)
-      addRocket( rocketCurrentPosition)
-      console.log('rocket current' ,rocketCurrentPosition)
-      console.log('player position', playerPosition)
-      rocketFlies = setInterval(() => {
-        removeRocket(rocketCurrentPosition)
-        const move = rocketCurrentPosition - width
-        rocketCurrentPosition = move
-        addRocket(rocketCurrentPosition)
-        // rocketPosition = rocketStartPosition - width
-        // removeRocket(rocketPosition)
-        // rocketPosition = rocketPosition - width
-        // addRocket(rocketPosition)
-        // console.log(rocketPosition , width)
-      },500)
+  function rocketHitsTop(position) {
+    if (position <= width) {
+      console.log('not')
+      return true
+    } else {
+      console.log('bottom')
+      return false
     }
   }
+
+  function rocketFired(e) {
+    if (e.keyCode === 32) {
+      const rocketStartPosition = playerPosition - width
+      let rocketCurrentPosition = rocketStartPosition
+      console.log('rocket start', rocketStartPosition)
+      addRocket(rocketCurrentPosition)
+      console.log('rocket current', rocketCurrentPosition)
+      console.log('player position', playerPosition)
+      rocketFlies = setInterval(() => {
+        if (rocketHitsTop(rocketCurrentPosition) === false) {
+          removeRocket(rocketCurrentPosition)
+          const move = rocketCurrentPosition - width
+          rocketCurrentPosition = move
+          addRocket(rocketCurrentPosition)
+          console.log(rocketCurrentPosition)
+        } else if (rocketHitsTop) {
+          removeRocket(rocketCurrentPosition)
+          clearInterval(rocketFlies)
+        }
+      }, 500)
+    }
+  }
+
+
 
   // Event
   document.addEventListener('keydown', rocketFired)
