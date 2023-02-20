@@ -50,3 +50,12 @@ body {
   background-size: contain;
   cursor: pointer;
 }
+
+/* Alien Image */
+
+.alien {
+  background-image: url('https://cdn.imgbin.com/5/7/6/imgbin-space-invaders-extreme-2-video-games-space-invaders-yRdC4SVjNzxXue92Zg3GyZD0J.jpg');
+  background-repeat: no-repeat;
+  background-size: contain;
+  cursor: pointer;
+}

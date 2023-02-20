@@ -102,6 +102,7 @@ function init() {
   let rocketFlies
   let rocketCurrentPosition
   let rocketInterval
+  let deadAlien
 
   // Execution
   function addRocket(position) {
@@ -120,37 +121,116 @@ function init() {
     }
   }
   
-
-  function rocketFired(e) {
-    if (e.keyCode === 32) {
-      const rocketStartPosition = playerPosition - width
-      rocketCurrentPosition = rocketStartPosition
-      addRocket(rocketCurrentPosition)
-      if (!rocketInterval) {
-        console.log('interval')
-        rocketInterval = setInterval(rocketMovementFunction,500)
-      } 
-
-    }
-  }
-
   function rocketMovementFunction () {
     if (rocketHitsTop(rocketCurrentPosition) === false) {
       removeRocket(rocketCurrentPosition)
       const move = rocketCurrentPosition - width
       rocketCurrentPosition = move
       addRocket(rocketCurrentPosition)
+      alienHitByRocket(AlienStartingPosition)
+      
     } else if (rocketHitsTop(rocketCurrentPosition)) {
       removeRocket(rocketCurrentPosition)
       clearInterval(rocketInterval)
     }
   }
 
+  function rocketFired(e) {
+    if (e.keyCode === 32) {
+      const rocketStartPosition = playerPosition - width
+      rocketCurrentPosition = rocketStartPosition
+      addRocket(rocketCurrentPosition)
+      // if (!rocketInterval) {
+      //   console.log('interval')
+      rocketInterval = setInterval(rocketMovementFunction,500)
+        
+      // } 
 
+    }
+  }
 
+  // function rocketFired(e) {
+  //   clearInterval(rocketInterval)
+    
+  //   if (e.keyCode === 32) {
+  //     const rocketStartPosition = playerPosition - width
+  //     rocketCurrentPosition = rocketStartPosition
+  //     rocketInterval = setInterval(() => {
+  //       const y = Math.floor(rocketCurrentPosition / width)
+  //       if (y === 0) {
+  //         removeRocket(rocketCurrentPosition)
+  //       } else {
+  //         removeRocket(rocketCurrentPosition)
+  //         rocketCurrentPosition -= width
+  //         addRocket(rocketCurrentPosition)
+  //       }
+  //     }, 500)
+      
+  //   }
+  //   removeRocket(rocketCurrentPosition)
+  // }
 
   // Event
   document.addEventListener('keydown', rocketFired)
+
+  // ! Alien Movement
+
+  // * Variables
+  let AlienStartingPosition = [30,35,36]
+  // let AliencurrentPosition = AlienstartingPosition
+
+
+  // Add/remove functions
+
+  function addAlien(position) {
+    position.forEach(index => {
+      cells[index].classList.add('alien')
+    })
+  }
+
+  function removeAlien(position) {
+    position.forEach(index => {
+      cells[index].classList.remove('alien')
+    })
+  }
+
+  function killAlien(position) {
+    cells[position].classList.remove('alien')
+  }
+
+
+    
+
+  addAlien(AlienStartingPosition)
+
+  // ! Collisions
+
+  function alienHitByRocket (array){
+    deadAlien = array.filter(dead => {
+      return dead === rocketCurrentPosition
+    })
+    deadAlien = Number(deadAlien)
+    
+    AlienStartingPosition.forEach( alien => {
+      if (alien === deadAlien) {
+        killAlien(alien)
+        removeRocket(alien)
+        clearInterval(rocketInterval)
+      }
+    })
+    console.log(AlienStartingPosition)
+  }
+
+  // console.log(rocketCurrentPosition)
+  // alienHitByRocket()
+
+
+  // AlienStartingPosition.forEach( alien => {
+  //   if (alien !== rocketCurrentPosition) {
+
+  //   }
+  // })
+
 }
 
 window.addEventListener('DOMContentLoaded', init)
