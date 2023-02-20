@@ -1,3 +1,4 @@
+
 function init() {
 
   // ! Generating a grid
@@ -62,30 +63,6 @@ function init() {
 
   }
 
-
-
-
-
-
-
-  // function rocketCat() {
-  //   let startingPosition = parseInt(currentPosition) + 10
-  //   console.log(startingPosition)
-  //   let newPosition
-  //   cells[startingPosition].classList.add('cat')
-  //   setInterval(() => {
-  //     newPosition = startingPosition + 10
-  //     startingPosition = newPosition
-  //   }, 200)
-  // }
-
-  // function catShoot(e) {
-  //   if (e.keyCode === 39) {
-  //     console.log('CLICKED RIGHT ARROW')
-  //     rocketCat()
-  //   }
-  // }
-
   // * Swarm Movement
 
   // Micro functions
@@ -121,8 +98,6 @@ function init() {
     })
   }
 
-  // hitBottom(currentPosition)
-  // console.log(hitBottom(currentPosition))
 
   function moveSwarm(movement) {
     // console.log('moving')
@@ -175,76 +150,25 @@ function init() {
           reset = true
         }
       }, 1000)
-      // alienMovesTwo = setInterval( () => {
-      //   moveSwarm(-1)
-      // })
+
 
 
     }
 
 
-    // if ( checkRight(currentPosition) === false && checkLeft(currentPosition)) {
-    //   const = setInterval()
-    //   moveSwarm(-1)
-    // }
-    // // if (dropped === true) {
-    // console.log('reached')
-    // alienMovesTwo = setInterval(() => {
-    //   if (checkLeft(currentPosition) === false) {
-    //     (console.log('left move'))
-    //     moveSwarm(-1)
-    //   } else {
-    //     console.log('drop2')
-    //     console.log(checkLeft(currentPosition))
-    //     moveSwarm(10)
-    //     clearInterval(alienMovesTwo)
-    //   }
-    // }, 1000)
 
-    // } else {
     console.log('hehe')
-    // }
+
   }
 
 
 
-  // alienMovesTwo = setInterval( () => {
-  //   if ( checkLeft(currentPosition)) {
-  //     console.log('left move')
-  //     moveSwarm(-1)
-  //   } else {
-  //     console.log('drop2')
-  //     moveSwarm(10)
-  //     clearInterval(alienMovesTwo)
-  //   }
-  // }, 1000)
-
-
-
-  //   if (e.keyCode === left ){
-  //     console.log('CLICKED LEFT ARROW')
-  //     const remove  = currentPosition.filter( safe => {
-  //       return safe !== currentPosition[2]
-  //     })
-  //     currentPosition = remove
-  //   }
-  // }
-  //     } else if (some(modulus === width - 1) {
-  //       move down 1
-  //       move left
-  //     } else if ( some(modulus === 0)) {
-  //       move down 1
-  //       move right
-  //     } if (hitsBottom) {
-  //       endGame()
-  //     }
 
 
 
   const start = document.getElementById('start')
   // ! Events
   start.addEventListener('click', moveCat)
-  // document.addEventListener('keydown', moveCat)
 
 
   // ! Page Load
