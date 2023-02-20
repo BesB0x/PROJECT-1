@@ -33,8 +33,19 @@ body {
   width: 10%;
 }
 
+/* player image  */
+
 .spaceShip {
   background-image: url('http://clipart-library.com/images/kcKboL5cj.jpg');
+  background-repeat: no-repeat;
+  background-size: contain;
+  cursor: pointer;
+}
+
+/* Rocket Image */
+
+.rocket {
+  background-image: url('https://www.pinclipart.com/picdir/middle/62-625813_missile-clipart-transparent-space-invaders-missile-png.png');
   background-repeat: no-repeat;
   background-size: contain;
   cursor: pointer;

@@ -92,6 +92,45 @@ function init() {
   // Events
   document.addEventListener('keydown', movePlayer)
 
+
+  // ! Player Rocket Fire
+
+
+  // Element
+  const rocketStartPosition = parseInt(playerPosition) - parseInt(width)
+  let rocketCurrentPosition 
+  let rocketFlies
+  // Execution
+  function addRocket (position) {
+    cells[position].classList.add('rocket')
+  }
+  function removeRocket (position) {
+    cells[position].classList.remove('rocket')
+  }
+  
+  function rocketFired(e) {
+    if (e.keyCode === 32) {
+      rocketCurrentPosition = rocketStartPosition 
+      console.log('rocket start' ,rocketStartPosition)
+      addRocket( rocketCurrentPosition)
+      console.log('rocket current' ,rocketCurrentPosition)
+      console.log('player position', playerPosition)
+      rocketFlies = setInterval(() => {
+        removeRocket(rocketCurrentPosition)
+        const move = rocketCurrentPosition - width
+        rocketCurrentPosition = move
+        addRocket(rocketCurrentPosition)
+        // rocketPosition = rocketStartPosition - width
+        // removeRocket(rocketPosition)
+        // rocketPosition = rocketPosition - width
+        // addRocket(rocketPosition)
+        // console.log(rocketPosition , width)
+      },500)
+    }
+  }
+
+  // Event
+  document.addEventListener('keydown', rocketFired)
 }
 
 window.addEventListener('DOMContentLoaded', init)
