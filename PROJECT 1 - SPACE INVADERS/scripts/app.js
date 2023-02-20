@@ -101,6 +101,7 @@ function init() {
 
   let rocketFlies
   let rocketCurrentPosition
+  let rocketInterval
 
   // Execution
   function addRocket(position) {
@@ -111,36 +112,40 @@ function init() {
   }
   function rocketHitsTop(position) {
     if (position <= width) {
-      console.log('not')
+      console.log('top')
       return true
     } else {
       console.log('bottom')
       return false
     }
   }
+  
 
   function rocketFired(e) {
     if (e.keyCode === 32) {
       const rocketStartPosition = playerPosition - width
-      let rocketCurrentPosition = rocketStartPosition
-      console.log('rocket start', rocketStartPosition)
+      rocketCurrentPosition = rocketStartPosition
       addRocket(rocketCurrentPosition)
-      console.log('rocket current', rocketCurrentPosition)
-      console.log('player position', playerPosition)
-      rocketFlies = setInterval(() => {
-        if (rocketHitsTop(rocketCurrentPosition) === false) {
-          removeRocket(rocketCurrentPosition)
-          const move = rocketCurrentPosition - width
-          rocketCurrentPosition = move
-          addRocket(rocketCurrentPosition)
-          console.log(rocketCurrentPosition)
-        } else if (rocketHitsTop) {
-          removeRocket(rocketCurrentPosition)
-          clearInterval(rocketFlies)
-        }
-      }, 500)
+      if (!rocketInterval) {
+        console.log('interval')
+        rocketInterval = setInterval(rocketMovementFunction,500)
+      } 
+
     }
   }
+
+  function rocketMovementFunction () {
+    if (rocketHitsTop(rocketCurrentPosition) === false) {
+      removeRocket(rocketCurrentPosition)
+      const move = rocketCurrentPosition - width
+      rocketCurrentPosition = move
+      addRocket(rocketCurrentPosition)
+    } else if (rocketHitsTop(rocketCurrentPosition)) {
+      removeRocket(rocketCurrentPosition)
+      clearInterval(rocketInterval)
+    }
+  }
+
 
 
 
