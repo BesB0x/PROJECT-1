@@ -101,7 +101,8 @@ function init() {
 
   let rocketFlies
   let rocketCurrentPosition
-  let rocketInterval
+  // let rocketInterval
+  let rocketIntervalTwo
   let deadAlien
 
   // Execution
@@ -120,30 +121,34 @@ function init() {
       return false
     }
   }
-  
-  function rocketMovementFunction () {
+
+  function rocketMovementFunction() {
+
     if (rocketHitsTop(rocketCurrentPosition) === false) {
       removeRocket(rocketCurrentPosition)
       const move = rocketCurrentPosition - width
       rocketCurrentPosition = move
       addRocket(rocketCurrentPosition)
-      alienHitByRocket(AlienStartingPosition)
-      
+      alienHitByRocket(alienStartingPosition)
+
     } else if (rocketHitsTop(rocketCurrentPosition)) {
       removeRocket(rocketCurrentPosition)
       clearInterval(rocketInterval)
     }
   }
-
+  let rocketInterval
   function rocketFired(e) {
+
     if (e.keyCode === 32) {
+
+      console.log(alienStartingPosition)
       const rocketStartPosition = playerPosition - width
       rocketCurrentPosition = rocketStartPosition
       addRocket(rocketCurrentPosition)
       // if (!rocketInterval) {
       //   console.log('interval')
-      rocketInterval = setInterval(rocketMovementFunction,500)
-        
+      rocketInterval = setInterval(rocketMovementFunction, 400)
+
       // } 
 
     }
@@ -151,10 +156,12 @@ function init() {
 
   // function rocketFired(e) {
   //   clearInterval(rocketInterval)
-    
+
   //   if (e.keyCode === 32) {
   //     const rocketStartPosition = playerPosition - width
   //     rocketCurrentPosition = rocketStartPosition
+  //     console.log('rocket posish', rocketCurrentPosition)
+  //     addRocket(rocketCurrentPosition)
   //     rocketInterval = setInterval(() => {
   //       const y = Math.floor(rocketCurrentPosition / width)
   //       if (y === 0) {
@@ -163,11 +170,15 @@ function init() {
   //         removeRocket(rocketCurrentPosition)
   //         rocketCurrentPosition -= width
   //         addRocket(rocketCurrentPosition)
+  //         alienHitByRocket(alienStartingPosition)
   //       }
   //     }, 500)
-      
+
+  //   } else if (e.keyCode === 39 || e.keyCode === 37){
+  //     console.log('not space')
   //   }
-  //   removeRocket(rocketCurrentPosition)
+  //   console.log(rocketCurrentPosition)
+  //   // removeRocket(rocketCurrentPosition)
   // }
 
   // Event
@@ -176,8 +187,8 @@ function init() {
   // ! Alien Movement
 
   // * Variables
-  let AlienStartingPosition = [30,35,36]
-  // let AliencurrentPosition = AlienstartingPosition
+  let alienStartingPosition = [30, 35, 36]
+  // let AliencurrentPosition = alienstartingPosition
 
 
   // Add/remove functions
@@ -188,44 +199,116 @@ function init() {
     })
   }
 
-  function removeAlien(position) {
-    position.forEach(index => {
-      cells[index].classList.remove('alien')
-    })
-  }
 
   function killAlien(position) {
     cells[position].classList.remove('alien')
+
   }
 
+  addAlien(alienStartingPosition)
 
-    
+  // ! Alien Rockets
 
-  addAlien(AlienStartingPosition)
+  // random number between 0 and Swarm length -1
+  // setInterval, 5000:
+  // random number generated
+  // forEach, if random number === index of alien, add rocket class beneath that alien
+  // if (collision)
+  // collision function
+  // else if (rocket hits bottom)
+  // remove class, clear interval
+  // else {
+  // move down screen
+
+  // Elements
+  let randomIndex
+
+  function addAlienRocket(position) {
+    cells[position].classList.add('rocket')
+  }
+
+  function removeAlienRocket(position) {
+    cells[position].classList.remove('rocket')
+  }
+
+  const start = document.querySelector('#start')
+  let alienRocketPosition
+  let alienRocketStart
+
+  function dropAlienRocket() {
+    setInterval(() => {
+      randomIndex = Math.floor(Math.random() * (alienStartingPosition.length))
+      console.log(randomIndex)
+      alienStartingPosition.forEach(alien => {
+        if (alienStartingPosition.indexOf(alien) === 1) {
+          const alienRocketStart = alien
+          addAlienRocket(alienRocketStart)
+          alienRocketPosition = alienRocketStart
+          console.log(alienRocketPosition, alienRocketStart)
+        }
+      })
+      const alienRocketMovementInterval = setInterval(() => {
+        console.log(rocketCurrentPosition + width > cellCount)
+        if (rocketCurrentPosition + width > cellCount) {
+          removeAlienRocket(alienRocketPosition)
+          clearInterval(alienRocketMovementInterval)
+        } else {
+          removeAlienRocket(alienRocketPosition)
+          // const rocketMove = alienRocketPosition + width
+          alienRocketPosition += width
+          addAlienRocket(alienRocketPosition)
+        }
+      }, 1000)
+
+    }, 1000)
+
+
+    //   console.log('rndm index inside interval', randomIndex)
+    //   if (alienRocketPosition + width > cellCount) {
+    //     removeAlienRocket
+    //     clearInterval(alienRocketMovementInterval)
+    //   } else {
+    //     alienRocketPosition = alienRocketStart
+    //     removeAlienRocket(alienRocketPosition)
+    //     const rocketMove = alienRocketPosition + width
+    //     alienRocketPosition = rocketMove
+    //     addAlienRocket(alienRocketPosition)
+    //   }
+
+
+  }
+
+  // Event
+  start.addEventListener('click', dropAlienRocket)
 
   // ! Collisions
 
-  function alienHitByRocket (array){
+  function alienHitByRocket(array) {
     deadAlien = array.filter(dead => {
       return dead === rocketCurrentPosition
     })
     deadAlien = Number(deadAlien)
-    
-    AlienStartingPosition.forEach( alien => {
+
+    alienStartingPosition.forEach(alien => {
       if (alien === deadAlien) {
         killAlien(alien)
         removeRocket(alien)
         clearInterval(rocketInterval)
+        alienStartingPosition = alienStartingPosition.filter(alien => {
+          if (alien !== deadAlien) {
+            return alien
+          }
+        })
       }
     })
-    console.log(AlienStartingPosition)
+    console.log(alienStartingPosition)
   }
 
   // console.log(rocketCurrentPosition)
   // alienHitByRocket()
 
 
-  // AlienStartingPosition.forEach( alien => {
+  // alienStartingPosition.forEach( alien => {
   //   if (alien !== rocketCurrentPosition) {
 
   //   }
