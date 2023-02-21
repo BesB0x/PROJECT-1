@@ -20,10 +20,9 @@ body {
   box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2);
   display: flex;
   flex-wrap: wrap;
-  height: 100%;
   justify-content: center;
-  height: 600px;
-  width: 600px;
+  height: 70%;
+  width: 70%;
 }
 
 .grid div {
@@ -55,6 +54,13 @@ body {
 
 .alien {
   background-image: url('https://cdn.imgbin.com/5/7/6/imgbin-space-invaders-extreme-2-video-games-space-invaders-yRdC4SVjNzxXue92Zg3GyZD0J.jpg');
+  background-repeat: no-repeat;
+  background-size: contain;
+  cursor: pointer;
+}
+
+.alienRocket {
+  background-image: url('https://3.bp.blogspot.com/-55OrfrFaa_c/UBY_exuEVqI/AAAAAAAAGzQ/Oy-JvgAM9ak/s1600/Boxer+Dog+Wallpapers+5.jpg');
   background-repeat: no-repeat;
   background-size: contain;
   cursor: pointer;
