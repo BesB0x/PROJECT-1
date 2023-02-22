@@ -49,7 +49,12 @@ function init() {
     gameEnd = false
     gameGrid.style.display = 'flex'
     endGameWrapper.style.display = 'none'
-    dropAlienRocket
+    dropAlienRocket()
+    lives = 3
+    score = 0
+    cells.forEach( cell => cell.classList.remove('alienRocket'))
+    swarmMovementIntervals()
+
   }
 
   const playAgain = document.getElementById('restart')
@@ -74,12 +79,12 @@ function init() {
 
   // * Variables
   const alienSetUps = {
-    0: [30, 40, 50, 60, 70, 80, 90, 100, 110],
-    1: [35, 45, 55, 65, 75, 85, 95, 15, 115],
-    2: [39, 49, 59, 69, 79, 89, 99, 19, 119],
-    3: [50, 60, 50, 60, 70, 80, 90, 100, 110],
-    4: [30, 40, 50, 90, 70, 80, 100, 120, 110],
-    5: [30, 40, 50, 60, 70, 80, 90, 100, 110],
+    0: [31,32,33,34,35],
+    1: [31,32,33,34,35],
+    2: [31,32,33,34,35],
+    3: [31,32,33,34,35],
+    4: [31,32,33,34,35],
+    5: [31,32,33,34,35],
   }
   let alienStartingPosition = alienSetUps[Math.floor(Math.random() * 5)]
 
@@ -227,7 +232,7 @@ function init() {
             scoreBoard.innerHTML = score
           }
         })
-      }, 400)
+      }, 500)
 
     }
   }
@@ -252,7 +257,6 @@ function init() {
     })
   }
 
-  // Micro functions
   function checkRight(swarm) {
     return swarm.every(alien => {
       if (alien % width !== width - 1) {
@@ -264,7 +268,7 @@ function init() {
   }
 
   function checkLeft(swarm) {
-    return swarm.some(alien => {
+    return !swarm.some(alien => {
       if (alien % width === 0) {
         return true
       } else {
@@ -277,72 +281,54 @@ function init() {
     return alienPosition.some(alien => {
       if (alien + width < cellCount) {
         console.log('not')
-        return true
+        return false
       } else {
         console.log('bottom')
-        return false
+        return true
       }
     })
   }
 
 
   function moveSwarm(movement) {
-    // console.log('moving')
     removeAlien(currentPosition)
     const move = currentPosition.map(alien => {
       return alien + movement
     })
     currentPosition = move
-    // console.log(currentPosition)
     addAlien(currentPosition)
   }
 
-  // Macro function
+  let alienMovesOne
 
   function swarmMovementIntervals() {
-    let dropped
-    let reset
-    let alienMovesOne
-    let alienMovesTwo
     let movingLeft
-
-
-    if (hitBottom(currentPosition)) {
+    if (!hitBottom(currentPosition)) {
       alienMovesOne = setInterval(() => {
-        dropped = false
-        reset = true
-        if (checkRight(currentPosition)) {
-          console.log('interval start')
-          console.log('right move')
-          console.log(currentPosition)
-          // console.log(checkRight(currentPosition))
-          moveSwarm(1)
+        if (movingLeft) {
+          if (checkLeft(currentPosition) ) {
+            console.log('can move left')
+            moveSwarm(-1)
+          } else  {
+            console.log('cant move left')
+            movingLeft = false
+            moveSwarm(width)
+          }
         } else {
-          console.log('from drop' + currentPosition)
-          dropped = true
-          console.log('drop1')
-          clearInterval(alienMovesOne)
-          moveSwarm(10)
+          if (checkRight(currentPosition)) {
+            console.log('can move right')
+            moveSwarm(1)
+          } else {
+            console.log('cant move right')
+            moveSwarm(width)
+            movingLeft = true
+          }
         }
-      }, 1000)
-      alienMovesTwo = setInterval(() => {
-        console.log('testing')
-        if (checkLeft(currentPosition) === false && dropped) {
-          console.log('next interval' + currentPosition)
-          moveSwarm(-1)
-          movingLeft = true
-        } else if (checkLeft(currentPosition) === true && dropped && movingLeft) {
-          console.log('found')
-          clearInterval(alienMovesTwo)
-          moveSwarm(10)
-          reset = true
-        }
-      }, 1000)
-
-
-
+      }, 500)
     }
   }
+
+
 
 
 
@@ -397,7 +383,7 @@ function init() {
         if (lives === 0) {
           endGame()
         }
-      }, 300)
+      }, 1000)
 
     }, 3000)
 
