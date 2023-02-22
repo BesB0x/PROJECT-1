@@ -3,7 +3,7 @@ function init() {
 
   // Create Grid
   const grid = document.querySelector('.grid')
-  const width = 10
+  const width = 20
   const cellCount = width * width
   const cells = []
 
@@ -15,7 +15,7 @@ function init() {
       const cell = document.createElement('div')
 
       // Add index as innerText
-      cell.innerText = i
+      // cell.innerText = i
 
       // Data attribute representing the index
       // cell.setAttribute('data-index', i)
@@ -83,22 +83,22 @@ function init() {
 
   }
   function movePlayer(e) {
-    console.log('keydown')
+    // console.log('keydown')
     const right = 39
     const left = 37
 
     removePlayer(playerPosition)
 
     if (e.keyCode === 39 && playerRight(playerPosition) === false) {
-      console.log('right')
+      // console.log('right')
       playerPosition++
 
     } else if (e.keyCode === 37 && playerLeft(playerPosition) === false) {
-      console.log('left')
+      // console.log('left')
       playerPosition--
 
     } else {
-      console.log('nope')
+      // console.log('nope')
     }
     addPlayer(playerPosition)
   }
@@ -113,7 +113,7 @@ function init() {
 
   // Element
 
-  let deadAlien
+
 
   // Execution
   function addRocket(position) {
@@ -124,21 +124,22 @@ function init() {
   }
   function rocketHitsTop(position) {
     if (position <= width) {
-      console.log('top')
+      // console.log('top')
       return true
     } else {
-      console.log('bottom')
+      // console.log('bottom')
       return false
     }
   }
 
   function rocketFired(e) {
-
+    e.preventDefault()
     if (e.keyCode === 32) {
       console.log(alienStartingPosition)
       let rocketCurrentPosition = playerPosition - width
       addRocket(rocketCurrentPosition)
       const rocketInterval = setInterval(() => {
+
         if (rocketHitsTop(rocketCurrentPosition) === false) {
           removeRocket(rocketCurrentPosition)
           rocketCurrentPosition -= width
@@ -149,6 +150,22 @@ function init() {
           removeRocket(rocketCurrentPosition)
           clearInterval(rocketInterval)
         }
+        cells.forEach(alienDead => {
+          if (alienDead.classList.contains('rocket') && alienDead.classList.contains('alien')) {
+            console.log(alienDead)
+            alienDead.classList.remove('rocket')
+            alienDead.classList.remove('alien')
+            clearInterval(rocketInterval)
+            const alienKilled = alienStartingPosition.filter(safe => {
+              return safe !== parseInt(alienDead.dataset.index)
+            })
+            console.log(alienStartingPosition)
+            alienStartingPosition = alienKilled
+            console.log(alienStartingPosition)
+            score += 100
+            scoreBoard.innerHTML = score
+          }
+        })
       }, 400)
 
 
@@ -213,7 +230,6 @@ function init() {
 
   function dropAlienRocket() {
     start.blur()
-    console.log('dropalienrocket')
     setInterval(() => {
       const randomIndex = Math.floor(Math.random() * (alienStartingPosition.length))
       let alienRocketPosition = alienStartingPosition[randomIndex]
@@ -235,9 +251,9 @@ function init() {
           alienRocketPosition += width
           addAlienRocket(alienRocketPosition)
         }
-      }, 500)
+      }, 300)
 
-    }, 3600)
+    }, 1000)
 
 
   }
@@ -247,12 +263,13 @@ function init() {
 
   // ! Collisions
 
-  // function playerHitByRocket() {
-  //   if (playerPosition === alienRocketPosition) {
-  //     console.log('hit')
-  //   }
 
-  // }
+  // if cell has class of both player rocket and alien
+  //  remove both classes, and take that alien out the alien array.
+
+
+
+
 
   // function alienHitByRocket(array) {
   //   deadAlien = array.filter(dead => {
