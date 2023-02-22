@@ -5,24 +5,38 @@
 body {
   height: 100vh;
   margin: 0;
+  background-color: black;
 }
 
+.game {
+  display: grid;
+  justify-items: center;
+  align-items: center;
+}
+
+.game > * {
+  grid-column-start: 1;
+  grid-row-start: 1;
+}
 
 .grid-wrapper {
   height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
+  
 }
 
 .grid {
   align-items: center;
-  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2);
+  /* box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2); */
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   height: 70%;
   width: 70%;
+  background-color: rgb(255, 255, 255);
+  border: 1px solid white;
 }
 
 .grid div {
@@ -48,13 +62,15 @@ body {
   background-repeat: no-repeat;
   background-size: contain;
   cursor: pointer;
+  z-index: 1;
 }
 
-/* Alien Image */
+/* Alien Images*/
 
 .alien {
   background-image: url('https://cdn.imgbin.com/5/7/6/imgbin-space-invaders-extreme-2-video-games-space-invaders-yRdC4SVjNzxXue92Zg3GyZD0J.jpg');
   background-repeat: no-repeat;
+  z-index: 2;
   background-size: contain;
   cursor: pointer;
 }
@@ -64,4 +80,35 @@ body {
   background-repeat: no-repeat;
   background-size: contain;
   cursor: pointer;
+  z-index: 2;
 }
+
+/* stars
+.star {
+  background-image: url('https://images.unsplash.com/photo-1542665174-31db64d7e0e4?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=654&q=80');
+  background-repeat: no-repeat;
+  background-size: contain;
+  cursor: pointer;
+  z-index: 0;
+} */
+
+/* End Game */
+
+.endGame-wrapper {
+    height: 100vh;
+    display: none;
+    justify-content: center;
+    align-items: center;
+}
+
+.end-game {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    height: 30vh;
+    width: 30vw;
+    border: 1px solid white;
+    background-color: rgb(210, 14, 14);
+}
+

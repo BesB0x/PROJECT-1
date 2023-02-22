@@ -15,7 +15,7 @@ function init() {
       const cell = document.createElement('div')
 
       // Add index as innerText
-      // cell.innerText = i
+      cell.innerText = i
 
       // Data attribute representing the index
       // cell.setAttribute('data-index', i)
@@ -31,6 +31,63 @@ function init() {
 
   createGrid()
 
+  // End Game
+  
+  let gameEnd = false
+  const gameGrid = document.querySelector('.grid')
+  const endGameWrapper = document.querySelector('.endGame-wrapper')
+
+  function endGame() {
+    gameEnd = true
+    endGameWrapper.style.display = 'flex'
+    gameGrid.style.display = 'none'
+  }
+  
+  // Restart
+
+  function restart() {
+    gameEnd = false
+    gameGrid.style.display = 'flex'
+    endGameWrapper.style.display = 'none'
+    dropAlienRocket
+  }
+  
+  const playAgain = document.getElementById('restart')
+  playAgain.addEventListener('click', restart)
+
+
+
+
+
+  // ! Stars and galaxies assigned
+  // function setStars() {
+  //   for (let i = 0; i !== alienStartingPosition && i !== playerPosition; i++) {
+  //     cells[Math.floor(Math.random() * cellCount)].classList.add('star')
+  //   }
+  // }
+
+
+  // Player starting position
+  const playerStart = Math.floor(cellCount - width / 2)
+  let playerPosition = playerStart
+  addPlayer(playerStart)
+
+  // * Variables
+  const alienSetUps = {
+    0: [30, 40, 50, 60, 70, 80, 90, 100, 110],
+    1: [35, 45, 55, 65, 75, 85, 95, 15, 115],
+    2: [39, 49, 59, 69, 79, 89, 99, 19, 119],
+    3: [50, 60, 50, 60, 70, 80, 90, 100, 110],
+    4: [30, 40, 50, 90, 70, 80, 100, 120, 110],
+    5: [30, 40, 50, 60, 70, 80, 90, 100, 110],
+  }
+  let alienStartingPosition = alienSetUps[Math.floor(Math.random() * 5)]
+  // let alienCurrentPosition = alienStartingPosition
+  // start.addEventListener('click', randomIndexSetUp )
+
+  // setStars()
+
+
 
 
   // ! Scoring
@@ -43,6 +100,8 @@ function init() {
   // ! Player's Lives
   let lives = 3
 
+
+
   const livesCounter = document.getElementById('lives')
 
   livesCounter.innerHTML = lives
@@ -50,10 +109,7 @@ function init() {
   // ! Player Movement
 
 
-  // Player starting position
-  const playerStart = Math.floor(cellCount - width / 2)
-  let playerPosition = playerStart
-  addPlayer(playerStart)
+
 
 
   // Executions
@@ -139,14 +195,16 @@ function init() {
       let rocketCurrentPosition = playerPosition - width
       addRocket(rocketCurrentPosition)
       const rocketInterval = setInterval(() => {
-
+        if (gameEnd) {
+          clearInterval(rocketInterval)
+        }
         if (rocketHitsTop(rocketCurrentPosition) === false) {
           removeRocket(rocketCurrentPosition)
           rocketCurrentPosition -= width
           addRocket(rocketCurrentPosition)
           // alienHitByRocket(alienStartingPosition)
-    
-        } else if (rocketHitsTop(rocketCurrentPosition) ) {
+
+        } else if (rocketHitsTop(rocketCurrentPosition)) {
           removeRocket(rocketCurrentPosition)
           clearInterval(rocketInterval)
         }
@@ -168,7 +226,6 @@ function init() {
         })
       }, 400)
 
-
     }
   }
 
@@ -179,12 +236,10 @@ function init() {
 
   // ! Alien Movement
 
-  // * Variables
-  let alienStartingPosition = [30, 35, 36]
-  // let AliencurrentPosition = alienstartingPosition
 
 
-  // Add/remove functions
+
+  // Add function
 
   function addAlien(position) {
     position.forEach(index => {
@@ -193,28 +248,15 @@ function init() {
   }
 
 
-  function killAlien(position) {
-    cells[position].classList.remove('alien')
+  // function killAlien(position) {
+  //   cells[position].classList.remove('alien')
 
-  }
+  // }
 
   addAlien(alienStartingPosition)
 
   // ! Alien Rockets
 
-  // random number between 0 and Swarm length -1
-  // setInterval, 5000:
-  // random number generated
-  // forEach, if random number === index of alien, add rocket class beneath that alien
-  // if (collision)
-  // collision function
-  // else if (rocket hits bottom)
-  // remove class, clear interval
-  // else {
-  // move down screen
-
-  // Elements
-  // let randomIndex
 
   function addAlienRocket(position) {
     cells[position].classList.add('alienRocket')
@@ -225,19 +267,22 @@ function init() {
   }
 
   const start = document.querySelector('#start')
-  
+
 
 
   function dropAlienRocket() {
     start.blur()
-    setInterval(() => {
+    const alienRocketBegin = setInterval(() => {
       const randomIndex = Math.floor(Math.random() * (alienStartingPosition.length))
       let alienRocketPosition = alienStartingPosition[randomIndex]
       addAlienRocket(alienRocketPosition)
+      if (gameEnd) {
+        clearInterval(alienRocketBegin)
+      }
       const alienRocketMovementInterval = setInterval(() => {
-        // console.log(alienRocketPosition + width > cellCount)
-        if (playerPosition === alienRocketPosition) {
-          // console.log('hit')
+        if (gameEnd) {
+          clearInterval(alienRocketMovementInterval)
+        } else if (playerPosition === alienRocketPosition) {
           clearInterval(alienRocketMovementInterval)
           lives--
           livesCounter.innerHTML = lives
@@ -251,15 +296,18 @@ function init() {
           alienRocketPosition += width
           addAlienRocket(alienRocketPosition)
         }
+        if (lives === 0) {
+          endGame()
+        }
       }, 300)
-
+      
     }, 1000)
-
 
   }
 
   // Event
   start.addEventListener('click', dropAlienRocket)
+
 
   // ! Collisions
 

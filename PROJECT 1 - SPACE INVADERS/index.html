@@ -8,10 +8,19 @@
   </head>
   <body>
     <button id="start"> Start</button>
-    
-    <div class="grid-wrapper">
-      <div class="grid"></div>
-    </div>
+
+    <section class = 'game'>
+      <div class="grid-wrapper">
+        <div class="grid"></div>
+      </div>
+      <div class = 'endGame-wrapper'>
+        <div class = 'end-game'>
+          <button id="restart"> Play Again?</button>
+          <p> Score: <span id="final-score"></span> </p>
+        </div>
+
+      </div>
+    </section>
     <p>
       <h2>Score</h2>
       <span id="score"></span>
@@ -20,5 +29,6 @@
       <h2>Lives</h2>
       <span id="lives"></span>
     </p>
+
   </body>
 </html>
