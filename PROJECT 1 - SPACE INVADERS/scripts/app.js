@@ -32,7 +32,7 @@ function init() {
   createGrid()
 
   // End Game
-  
+
   let gameEnd = false
   const gameGrid = document.querySelector('.grid')
   const endGameWrapper = document.querySelector('.endGame-wrapper')
@@ -42,7 +42,7 @@ function init() {
     endGameWrapper.style.display = 'flex'
     gameGrid.style.display = 'none'
   }
-  
+
   // Restart
 
   function restart() {
@@ -51,7 +51,7 @@ function init() {
     endGameWrapper.style.display = 'none'
     dropAlienRocket
   }
-  
+
   const playAgain = document.getElementById('restart')
   playAgain.addEventListener('click', restart)
 
@@ -82,6 +82,9 @@ function init() {
     5: [30, 40, 50, 60, 70, 80, 90, 100, 110],
   }
   let alienStartingPosition = alienSetUps[Math.floor(Math.random() * 5)]
+
+
+  let currentPosition = alienStartingPosition
   // let alienCurrentPosition = alienStartingPosition
   // start.addEventListener('click', randomIndexSetUp )
 
@@ -236,16 +239,111 @@ function init() {
 
   // ! Alien Movement
 
-
-
-
-  // Add function
+  // Add/remove function
 
   function addAlien(position) {
     position.forEach(index => {
       cells[index].classList.add('alien')
     })
   }
+  function removeAlien(position) {
+    position.forEach(index => {
+      cells[index].classList.remove('alien')
+    })
+  }
+
+  // Micro functions
+  function checkRight(swarm) {
+    return swarm.every(alien => {
+      if (alien % width !== width - 1) {
+        return true
+      } else {
+        return false
+      }
+    })
+  }
+
+  function checkLeft(swarm) {
+    return swarm.some(alien => {
+      if (alien % width === 0) {
+        return true
+      } else {
+        return false
+      }
+    })
+  }
+
+  function hitBottom(alienPosition) {
+    return alienPosition.some(alien => {
+      if (alien + width < cellCount) {
+        console.log('not')
+        return true
+      } else {
+        console.log('bottom')
+        return false
+      }
+    })
+  }
+
+
+  function moveSwarm(movement) {
+    // console.log('moving')
+    removeAlien(currentPosition)
+    const move = currentPosition.map(alien => {
+      return alien + movement
+    })
+    currentPosition = move
+    // console.log(currentPosition)
+    addAlien(currentPosition)
+  }
+
+  // Macro function
+
+  function swarmMovementIntervals() {
+    let dropped
+    let reset
+    let alienMovesOne
+    let alienMovesTwo
+    let movingLeft
+
+
+    if (hitBottom(currentPosition)) {
+      alienMovesOne = setInterval(() => {
+        dropped = false
+        reset = true
+        if (checkRight(currentPosition)) {
+          console.log('interval start')
+          console.log('right move')
+          console.log(currentPosition)
+          // console.log(checkRight(currentPosition))
+          moveSwarm(1)
+        } else {
+          console.log('from drop' + currentPosition)
+          dropped = true
+          console.log('drop1')
+          clearInterval(alienMovesOne)
+          moveSwarm(10)
+        }
+      }, 1000)
+      alienMovesTwo = setInterval(() => {
+        console.log('testing')
+        if (checkLeft(currentPosition) === false && dropped) {
+          console.log('next interval' + currentPosition)
+          moveSwarm(-1)
+          movingLeft = true
+        } else if (checkLeft(currentPosition) === true && dropped && movingLeft) {
+          console.log('found')
+          clearInterval(alienMovesTwo)
+          moveSwarm(10)
+          reset = true
+        }
+      }, 1000)
+
+
+
+    }
+  }
+
 
 
   // function killAlien(position) {
@@ -274,7 +372,7 @@ function init() {
     start.blur()
     const alienRocketBegin = setInterval(() => {
       const randomIndex = Math.floor(Math.random() * (alienStartingPosition.length))
-      let alienRocketPosition = alienStartingPosition[randomIndex]
+      let alienRocketPosition = currentPosition[randomIndex]
       addAlienRocket(alienRocketPosition)
       if (gameEnd) {
         clearInterval(alienRocketBegin)
@@ -300,13 +398,14 @@ function init() {
           endGame()
         }
       }, 300)
-      
-    }, 1000)
+
+    }, 3000)
 
   }
 
   // Event
   start.addEventListener('click', dropAlienRocket)
+  start.addEventListener('click', swarmMovementIntervals)
 
 
   // ! Collisions
