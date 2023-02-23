@@ -15,7 +15,7 @@ function init() {
       const cell = document.createElement('div')
 
       // Add index as innerText
-      cell.innerText = i
+      // cell.innerText = i
 
       // Data attribute representing the index
       // cell.setAttribute('data-index', i)
@@ -36,25 +36,37 @@ function init() {
   let gameEnd = false
   const gameGrid = document.querySelector('.grid')
   const endGameWrapper = document.querySelector('.endGame-wrapper')
+  let alienRocketMovementInterval
 
   function endGame() {
+    cells.forEach( cell => cell.classList.remove('alienRocket'))
+    cells.forEach( cell => cell.classList.remove('alien'))
+    cells.forEach( cell => cell.classList.remove('rocket'))
     gameEnd = true
     endGameWrapper.style.display = 'flex'
-    gameGrid.style.display = 'none'
+    // gameGrid.style.display = 'none'
+    clearInterval(alienMovesOne)
+    clearInterval(alienRocketMovementInterval)
   }
-
+  let alienRocketPosition
   // Restart
 
   function restart() {
+    console.log('listened to')
     gameEnd = false
     gameGrid.style.display = 'flex'
     endGameWrapper.style.display = 'none'
     dropAlienRocket()
     lives = 3
+    livesCounter.innerHTML = lives
     score = 0
-    cells.forEach( cell => cell.classList.remove('alienRocket'))
+    scoreBoard.innerHTML = score
+    currentPosition = alienStartingPosition
     swarmMovementIntervals()
-
+    
+    playerPosition = playerStart
+    removePlayer(playerPosition)
+    addPlayer(playerStart)
   }
 
   const playAgain = document.getElementById('restart')
@@ -106,9 +118,7 @@ function init() {
   scoreBoard.innerHTML = score
 
   // ! Player's Lives
-  let lives = 3
-
-
+  let lives = 0
 
   const livesCounter = document.getElementById('lives')
 
@@ -169,7 +179,7 @@ function init() {
 
 
   // Events
-  document.addEventListener('keydown', movePlayer)
+  document.addEventListener('keyup', movePlayer)
 
 
   // ! Player Rocket Fire
@@ -195,7 +205,7 @@ function init() {
       return false
     }
   }
-
+  let rocketCurrentPosition
   function rocketFired(e) {
     e.preventDefault()
     if (e.keyCode === 32) {
@@ -305,6 +315,7 @@ function init() {
     let movingLeft
     if (!hitBottom(currentPosition)) {
       alienMovesOne = setInterval(() => {
+
         if (movingLeft) {
           if (checkLeft(currentPosition) ) {
             console.log('can move left')
@@ -325,6 +336,8 @@ function init() {
           }
         }
       }, 500)
+    } else {
+      gameEnd()
     }
   }
 
@@ -332,10 +345,7 @@ function init() {
 
 
 
-  // function killAlien(position) {
-  //   cells[position].classList.remove('alien')
 
-  // }
 
   addAlien(alienStartingPosition)
 
@@ -355,7 +365,10 @@ function init() {
 
 
   function dropAlienRocket() {
+    // remove defualy behaviour and start box
     start.blur()
+    const startbox = document.querySelector('#start-spiral')
+    startbox.style.display = 'none'
     const alienRocketBegin = setInterval(() => {
       const randomIndex = Math.floor(Math.random() * (alienStartingPosition.length))
       let alienRocketPosition = currentPosition[randomIndex]
@@ -392,42 +405,6 @@ function init() {
   // Event
   start.addEventListener('click', dropAlienRocket)
   start.addEventListener('click', swarmMovementIntervals)
-
-
-  // ! Collisions
-
-
-  // if cell has class of both player rocket and alien
-  //  remove both classes, and take that alien out the alien array.
-
-
-
-
-
-  // function alienHitByRocket(array) {
-  //   deadAlien = array.filter(dead => {
-  //     return dead === rocketCurrentPosition
-  //   })
-  //   deadAlien = Number(deadAlien)
-
-  //   alienStartingPosition.forEach(alien => {
-  //     if (alien === deadAlien) {
-  //       killAlien(alien)
-  //       removeRocket(alien)
-  //       score += 100
-  //       scoreBoard.innerHTML = score
-  //       clearInterval(rocketInterval)
-  //       alienStartingPosition = alienStartingPosition.filter(alien => {
-  //         if (alien !== deadAlien) {
-  //           return alien
-  //         }
-  //       })
-  //     }
-  //   })
-  //   console.log(alienStartingPosition)
-  // }
-
-
 }
 
 window.addEventListener('DOMContentLoaded', init)

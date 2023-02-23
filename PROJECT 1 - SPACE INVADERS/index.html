@@ -7,27 +7,62 @@
     <script src="scripts/app.js" charset="utf-8"></script>
   </head>
   <body>
-    <button id="start"> Start</button>
+    
     <section class = 'game'>
-      <div class="grid-wrapper">
-        <div class="grid"></div>
+      <div class='grid-wrapper'>
+        <div class='grid'></div>
+      </div>
+      <div id='start-spiral' class="star-spiral">
+        <div class='star one' ></div>
+        <div class='star two' ></div>
+        <div class='star three' ></div>
+        <div class='star four' ></div>
+        <div class='star five' >
+          <h1> SPACE INVADERS</h1>
+          <p> Greetings ambitious earthling, are you prepared <br /> to save your species from destruction? Move <br /> with the left and right arrows and shoot with<br />  the spacebar. Are you ready? </p>
+          <button id="start"> YES</button>
+        </div>
+        
       </div>
       <div class = 'endGame-wrapper'>
         <div class = 'end-game'>
           <button id="restart"> Play Again?</button>
           <p> Score: <span id="final-score"></span> </p>
         </div>
-
       </div>
     </section>
-    <p class="score">
-      <h2>Score</h2>
-      <span id="score"></span>
-    </p>
-    <p class="lives">
-      <h2>Lives</h2>
-      <span id="lives"></span>
-    </p>
+    <div id = 'score-lives-start'>
 
+      <div class='star-spiral'>
+        <div class='star one' ></div>
+        <div class='star two' ></div>
+        <div class='star three' ></div>
+        <div class='star four' ></div>
+        <div class='star five' ></div>
+        <div class='star six' ></div>
+        <p id="livesp"> Lives : <br /> <span id='lives'>3</span></p>
+      </div>
+      <div class='star-spiral'>
+        <div class='star one' ></div>
+        <div class='star two' ></div>
+        <div class='star three' ></div>
+        <div class='star four' ></div>
+        <div class='star five' ></div>
+        <div class='star six' ></div>
+        <p id="scorep"> Score : <br /> <span id='score'>0</span></p>
+      </div>
+
+      <!-- <div id="score-div">
+      <p>
+        <h2>Score</h2>
+        <span id="score"></span>
+      </p>
+    </div>
+    <div id="lives-div">
+      <p>
+        <h2>Lives</h2>
+        <span id="lives"></span>
+      </p> -->
+    </div>
   </body>
 </html>

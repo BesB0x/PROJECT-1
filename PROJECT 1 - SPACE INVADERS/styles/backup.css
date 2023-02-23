@@ -10,7 +10,7 @@ body {
   background-size: cover;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   padding: 60px;
 }
 
@@ -56,11 +56,10 @@ body {
 /* player image  */
 
 .spaceShip {
-  background-image: url('https://i.imgur.com/btRpKhI.png');
+  background-image: url('http://clipart-library.com/images/kcKboL5cj.jpg');
   background-repeat: no-repeat;
   background-size: contain;
   cursor: pointer;
-  height: 150%;
 }
 
 /* Rocket Image */
@@ -91,6 +90,15 @@ body {
   z-index: 2;
 }
 
+/* stars
+.star {
+  background-image: url('https://images.unsplash.com/photo-1542665174-31db64d7e0e4?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=654&q=80');
+  background-repeat: no-repeat;
+  background-size: contain;
+  cursor: pointer;
+  z-index: 0;
+} */
+
 /* End Game */
 
 .endGame-wrapper {
@@ -115,55 +123,45 @@ body {
 
 #score-lives-start {
 
-  width: 100px;
+  width: 350px;
   text-align: center;
   margin: 5px;
-  height: 500px;
+  height: 700px;
   display: flex;
   flex-direction: column;
 }
 
-#scorep {
-  color: white;
-  background-image: url('https://images.pexels.com/photos/7373776/pexels-photo-7373776.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2');
-  background-position: center;
-  background-size: cover;
-  width: 70px;
-  height:40px;
+#start-div{
+  text-align: left;
+  background-color: blueviolet;
+  padding: 0,0,0,20;
+}
+
+#score-div{
+  text-align: right;
+  background-color: darkturquoise;
+}
+
+#lives-div {
+  text-align: center;
+  background-color: rgb(0, 211, 200);
   font-weight: bold;
 }
 
-#livesp {
-  color: white;
-  background-image: url('https://images.pexels.com/photos/7373776/pexels-photo-7373776.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2');
-  background-position: center;
-  background-size: cover;
+#score {
+  color: red;
+  background-color: white;
+  text-align: left;
+}
+
+#lives {
+  color: green;
+  background-color: white;
+}
+
+h2 {
   font-weight: bold;
-  width: 70px;
-  height:40px;
-}
-
-#start {
-  color: white;
-  background-image: url('https://images.pexels.com/photos/7373776/pexels-photo-7373776.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2');
-  background-position: center;
-  background-size: cover;
-  font-weight: bold;
-  width: 50px
-}
-
-/* start */
-#start-spiral .five {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  background-color: red;
-  
-}
-
-h1 {
-  margin: 0
+  color: deepskyblue;
 }
 
 /* star decor */
