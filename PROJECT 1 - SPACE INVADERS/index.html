@@ -1,8 +1,11 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Tilt+Prism&display=swap" rel="stylesheet">
     <meta charset="utf-8">
-    <title>GRID GAME!</title>
+    <title>SPACE INVADERS</title>
     <link rel="stylesheet" href="styles/main.css">
     <script src="scripts/app.js" charset="utf-8"></script>
   </head>
@@ -24,19 +27,21 @@
         </div>
       </div>
       <div id = 'endGame-wrapper-loss'>
-        <div class = 'end-game'>
-          <div class="alien"></div>
-          <p class="alien-speaking"> º_º MUAJAJAJAJAJAJAJAJA YOU LOOOOOOSE ª_ª <br /> </p>
+        <div class = 'end-game' >
+          <p id = 'speaking-loss'class="alien-speaking "> º_º MUAJAJAJAJAJAJAJAJA YOU LOOOOOOSE ª_ª <br /> </p>
+          <div id='score-loss' class = 'bottom-end '>
           <p class="end-score"> Score: <span id="final-score-loss"></span> </p>
-          <button id="restart-loss"> Dare To Play Again?</button>
+          <button class='restart' id="restart-win"> Dare To Play Again?</button>
+        </div>
         </div>
       </div>
       <div id = 'endGame-wrapper-win'>
         <div class = 'end-game'>
-          <div class="alien"></div>
           <p class="alien-speaking"> º_º well.....I suppose you win this time, fancy another go? Please? ª_ª <br /> </p>
-          <p class="end-score"> Score: <span id="final-score-win"></span> </p>
-          <button id="restart-win"> Dare To Play Again?</button>
+          <div class="bottom-end">
+            <p class="end-score"> Score: <span id="final-score-win"></span> </p>
+            <button class = 'restart' id="restart-loss"> Give Them Another Chance?</button>
+          </div>
         </div>
       </div>
     </section>
@@ -60,8 +65,9 @@
         <div class='star six' ></div>
         <p id="scorep"> Score : <br /> <span id='score'>0</span></p>
       </div>
-      <audio id="intro-sound" src="https://soundcloud.com/tom-clegg-8/aliens?si=8b3560b97e804bed9f500756d912aee3&utm_source=clipboard&utm_medium=text&utm_campaign=social_sharing"></audio>
-      <audio id="main-sound" src="https://soundcloud.com/tom-clegg-8/attack-with-jazz?si=8b3560b97e804bed9f500756d912aee3&utm_source=clipboard&utm_medium=text&utm_campaign=social_sharing"></audio>
+      <audio id="intro" src='assets/intro.wav'></audio>
+      <audio id="main" src='assets/main.wav'></audio>
+      <button id="play-button">hear the aliens º_º</button>
     </div>
   </body>
 </html>

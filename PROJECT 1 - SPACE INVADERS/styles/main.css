@@ -1,5 +1,7 @@
 * {
   box-sizing: border-box;
+  font-family: 'Tilt Prism', cursive;
+  font-weight: bold;
 }
 
 body {
@@ -15,7 +17,6 @@ body {
 }
 
 .game {
-
   display: grid;
   justify-items: center;
   align-items: center;
@@ -43,6 +44,7 @@ body {
   width: 700px;
   background-image: url('https://images.pexels.com/photos/7373776/pexels-photo-7373776.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2');
   background-position: center;
+  background-color: white;
   background-size: cover;
   border: 1px solid white;
 }
@@ -53,6 +55,12 @@ body {
   width: 5%;
 }
 
+.barrier {
+  background-image: url('https://i.imgur.com/eb6Je7w.png');
+  background-repeat: no-repeat;
+  background-size: contain;
+  cursor: pointer;
+}
 /* player image  */
 
 .spaceShip {
@@ -114,31 +122,55 @@ body {
 .end-game {
   align-items: center;
   display: flex;
-  justify-content: center;
-  height: 300px;
-  width: 300px;
+  justify-content: space-between;
+  height: 250px;
+  width: 250px;
   border: 1px solid white;
-  background-image: url('https://i.imgur.com/qSTL5kW.png');
-  background-repeat: no-repeat;
-  background-size: contain;
+  background-image: url(https://i.imgur.com/qSTL5kW.png);
+  background-repeat: repeat;
+  background-size: 100px;
   cursor: pointer;
-  padding: 30px;
+  padding-top: 36px;
   align-content: center;
   flex-wrap: wrap;
-  flex-direction: column;
+  flex-direction: row;
 }
+
+#speaking-loss {
+  padding: 10px;
+  /* margin-bottom: 25px; */
+  height: 59px;
+  margin-top: 0;
+  margin-bottom: 44px;
+}
+
+/* #score-loss{
+
+} */
 
 .alien-speaking{
   background-color: rgb(236, 98, 98);
   text-align: center;
+  padding: 5px;
 }
 
 .end-score {
   background-color: rgb(215, 46, 4);
+  margin-left: 5px;
+  text-align: center;
 }
 
 .restart {
   background-color: rgb(242, 116, 20);
+}
+
+.bottom-end{
+  width: 250px;
+  display: flex;
+  justify-content: space-around;
+  background-color: rgb(242, 116, 20);
+  margin-bottom: 36px;
+  align-items: center;
 }
 /* score and lives */
 
@@ -192,24 +224,26 @@ body {
   background-color: red;
   border:none;
   text-align: center;
+  height: 50%;
 }
 
 h1 {
   margin: 0;
-  color: rgba(237, 56, 10, 0.76);
+  color: rgb(237, 55, 10);
   background-position: center;
   background-size: cover;
   background-image: url('https://images.pexels.com/photos/7373776/pexels-photo-7373776.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2');
   padding-left: 40px;
   padding-right: 40px;
+  /* border: solid 3px red */
 }
 
 #greeting {
-  color: rgb(200 20 20 / 85%);
+  color: rgb(255, 255, 255);
     background-position: center;
     background-size: cover;
     background-image: url(https://images.pexels.com/photos/7373776/pexels-photo-7373776.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2);
-    padding:5px;
+    margin-bottom:5px;
     
 }
 

@@ -10,7 +10,7 @@ function init() {
   function createGrid() {
     // Using the total cell count we've saved to a variable we're going to use a for loop to iterate that many times
     for (let i = 0; i < cellCount; i++) {
-      console.log('CELL CREATED')
+      // console.log('CELL CREATED')
       // Create div cell
       const cell = document.createElement('div')
 
@@ -31,11 +31,30 @@ function init() {
 
 
   // audio 
-  const mainSound = document.querySelector('#main-sound')
-  
+  // Intro
+  const introSound = document.querySelector('#intro')
+  const introButton = document.querySelector('#play-button')
 
+  function playIntro() {
+    introSound.play()
+    // console.log('click')
+  }
+
+  // function stopIntro() {
+  //   introSound.pause()
+  // }
+  introButton.addEventListener('click', playIntro)
+
+
+
+  // Main
+  const mainSound = document.querySelector('#main')
   function playMain() {
-    mainSound.play
+    mainSound.play()
+  }
+
+  function stopMain() {
+    mainSound.pause()
   }
   createGrid()
 
@@ -51,20 +70,20 @@ function init() {
     cells.forEach(cell => cell.classList.remove('alienRocket'))
     cells.forEach(cell => cell.classList.remove('alien'))
     cells.forEach(cell => cell.classList.remove('rocket'))
-    gameEnd = true
-    endGameWrapperLoss.style.display = 'flex'
-    // gameGrid.style.display = 'none'
+    cells.forEach(cell => cell.classList.remove('spaceShip'))
     clearInterval(alienMovesOne)
     clearInterval(alienRocketMovementInterval)
-    const endScore = document.getElementById('final-score-loss')
-    endScore.innerText = score
+    clearInterval(alienRocketBegin)
+    gameEnd = true
+    stopMain()
+    playIntro()
+
   }
-  let alienRocketPosition
 
   // Restart
 
   function restart() {
-    console.log('listened to')
+    // console.log('listened to')
     gameEnd = false
     gameGrid.style.display = 'flex'
     endGameWrapperLoss.style.display = 'none'
@@ -83,9 +102,13 @@ function init() {
 
   const playAgainLoss = document.getElementById('restart-loss')
   playAgainLoss.addEventListener('click', restart)
+  playAgainLoss.addEventListener('click', playMain)
+  // playAgainLoss.addEventListener('click', stopIntro)
 
   const playAgainWin = document.getElementById('restart-win')
   playAgainWin.addEventListener('click', restart)
+  playAgainWin.addEventListener('click', playMain)
+  // playAgainWin.addEventListener('click', stopIntro) 
 
 
 
@@ -97,14 +120,15 @@ function init() {
 
   // * Variables
   const alienSetUps = {
-    0: [31, 32, 33, 34, 35],
-    1: [31, 32, 33, 34, 35],
-    2: [31, 32, 33, 34, 35],
-    3: [31, 32, 33, 34, 35],
-    4: [31, 32, 33, 34, 35],
-    5: [31, 32, 33, 34, 35],
+    0: [30, 50, 51, 52, 53, 70, 71, 72, 90, 91, 31, 32, 33, 95, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 124, 125, 126, 127, 128, 129, 130, 133, 134, 135, 145, 146, 147, 148, 149, 150, 151, 152, 153, 154, 155, 166, 167, 168, 169, 170, 171, 172, 173, 174, 175],
+    1: [146, 147, 148, 154, 155, 156, 134, 135, 136, 116, 96, 97, 76, 77, 56, 57, 36, 37, 35, 55, 75, 34, 54, 33, 66, 67, 46, 47, 26, 27, 28, 29, 30, 49, 48, 67, 95, 94, 93, 92, 112, 132, 152, 172, 173, 174, 175, 176, 125, 126, 127, 107, 87, 86, 85, 84, 83, 103, 123, 143, 163, 164, 165, 166, 167, 69, 70, 71, 91, 111, 110, 109, 108, 107, 127, 128, 129, 130, 131],
+    2: [49, 29, 9, 10, 11, 12, 13, 30, 31, 32, 33, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 123, 124, 125, 126, 127, 128, 129, 130, 131, 132, 133, 143, 144, 145, 146, 147, 148, 149, 140, 142, 163, 164, 165, 166, 183, 184, 185, 150, 151, 152, 153, 170, 171, 172, 190, 191, 210, 203],
+    3: [30, 50, 51, 52, 53, 70, 71, 72, 90, 91, 31, 32, 33, 95, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 124, 125, 126, 127, 128, 129, 130, 133, 134, 135, 145, 146, 147, 148, 149, 150, 151, 152, 153, 154, 155, 166, 167, 168, 169, 170, 171, 172, 173, 174, 175],
+    4: [30, 50, 51, 52, 53, 70, 71, 72, 90, 91, 31, 32, 33, 95, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 124, 125, 126, 127, 128, 129, 130, 133, 134, 135, 145, 146, 147, 148, 149, 150, 151, 152, 153, 154, 155, 166, 167, 168, 169, 170, 171, 172, 173, 174, 175],
+    5: [30, 50, 51, 52, 53, 70, 71, 72, 90, 91, 31, 32, 33, 95, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 124, 125, 126, 127, 128, 129, 130, 133, 134, 135, 145, 146, 147, 148, 149, 150, 151, 152, 153, 154, 155, 166, 167, 168, 169, 170, 171, 172, 173, 174, 175],
   }
-  const alienStartingPosition = alienSetUps[Math.floor(Math.random() * 5)]
+  const alienStartingPosition = alienSetUps[Math.floor(Math.random() * 2)]
+  // const alienStartingPosition = alienSetUps[2]
   let currentPosition = alienStartingPosition
 
 
@@ -162,20 +186,31 @@ function init() {
     const right = 39
     const left = 37
 
-    removePlayer(playerPosition)
+    function moveRight() {
+      removePlayer(playerPosition)
+      playerPosition++
+      addPlayer(playerPosition)
+    }
+
+    function moveLeft(){
+      removePlayer(playerPosition)
+      playerPosition--
+      addPlayer(playerPosition)
+    }
 
     if (e.keyCode === 39 && playerRight(playerPosition) === false) {
       // console.log('right')
-      playerPosition++
+      // setTimeout(moveRight,200)
+      moveRight()
 
     } else if (e.keyCode === 37 && playerLeft(playerPosition) === false) {
       // console.log('left')
-      playerPosition--
-
+      // setTimeout(moveLeft,200)
+      moveLeft()
     } else {
       // console.log('nope')
     }
-    addPlayer(playerPosition)
+  
   }
 
 
@@ -210,7 +245,7 @@ function init() {
   function rocketFired(e) {
     e.preventDefault()
     if (e.keyCode === 32) {
-      console.log(alienStartingPosition)
+      // console.log(alienStartingPosition)
       let rocketCurrentPosition = playerPosition - width
       addRocket(rocketCurrentPosition)
       const rocketInterval = setInterval(() => {
@@ -227,18 +262,29 @@ function init() {
           removeRocket(rocketCurrentPosition)
           clearInterval(rocketInterval)
         }
+
+        // cells.forEach(cell => {
+        //   if (cell.classList.contains('barrier') && cell.classList.contains('rocket')) {
+        //     // console.log('hit')
+        //     // removeAlienRocket(alienRocketPosition)
+        //     removeBarrier(rocketCurrentPosition)
+        //     // clearInterval(alienRocketMovementInterval)
+        //     clearInterval(rocketInterval)
+        //     removeRocket(rocketCurrentPosition)
+        //   }
+        // })
         cells.forEach(alienDead => {
           if (alienDead.classList.contains('rocket') && alienDead.classList.contains('alien')) {
-            console.log(alienDead)
+            // console.log(alienDead)
             alienDead.classList.remove('rocket')
             alienDead.classList.remove('alien')
             clearInterval(rocketInterval)
             const alienKilled = currentPosition.filter(safe => {
               return safe !== parseInt(alienDead.dataset.index)
             })
-            console.log(currentPosition)
+            // console.log(currentPosition)
             currentPosition = alienKilled
-            console.log(currentPosition)
+            // console.log(currentPosition)
             score += 100
             scoreBoard.innerHTML = score
           }
@@ -246,23 +292,39 @@ function init() {
         // Player Win
 
         if (score === parseInt(alienStartingPosition.length) * 100) {
-          console.log('endgame')
-          cells.forEach(cell => cell.classList.remove('alienRocket'))
-          cells.forEach(cell => cell.classList.remove('alien'))
-          cells.forEach(cell => cell.classList.remove('rocket'))
-          cells.forEach(cell => cell.classList.remove('spaceShip'))
-          clearInterval(alienMovesOne)
-          clearInterval(alienRocketMovementInterval)
-          clearInterval(alienRocketBegin)
-          gameEnd = true
+          // console.log('endgame')
+          endGame()
           endGameWrapperWin.style.display = 'flex'
           const endScore = document.getElementById('final-score-win')
           endScore.innerText = score
         }
-      }, 500)
+      }, 300)
 
     }
   }
+
+
+  // barriers
+
+  // function createBarrier(position) {
+  //   cells[position].classList.add('barrier')
+  // }
+
+  // function removeBarrier(position) {
+  //   cells[position].classList.remove('barrier')
+  // }
+
+  // const barrierStart = [304,305,306,311,312,316]
+
+  // function barrierSet () {
+  //   barrierStart.forEach( start => {
+  //     createBarrier(start)
+  //   })
+  // }
+
+  // interval for rocket collisions
+
+
 
 
 
@@ -307,10 +369,10 @@ function init() {
   function hitBottom(alienPosition) {
     return alienPosition.some(alien => {
       if (alien + width < cellCount) {
-        console.log('not')
+        // console.log('not')
         return false
       } else {
-        console.log('bottom')
+        // console.log('bottom')
         return true
       }
     })
@@ -330,32 +392,35 @@ function init() {
 
   function swarmMovementIntervals() {
     let movingLeft
-    if (!hitBottom(currentPosition)) {
-      alienMovesOne = setInterval(() => {
-
+    alienMovesOne = setInterval(() => {
+      if (!hitBottom(currentPosition)) {
         if (movingLeft) {
           if (checkLeft(currentPosition)) {
-            console.log('can move left')
+            // console.log('can move left')
             moveSwarm(-1)
           } else {
-            console.log('cant move left')
+            // console.log('cant move left')
             movingLeft = false
             moveSwarm(width)
           }
         } else {
           if (checkRight(currentPosition)) {
-            console.log('can move right')
+            // console.log('can move right')
             moveSwarm(1)
           } else {
-            console.log('cant move right')
+            // console.log('cant move right')
             moveSwarm(width)
             movingLeft = true
           }
         }
-      }, 500)
-    } else {
-      gameEnd()
-    }
+      } else {
+        // console.log('bottom hit')
+        endGame()
+        endGameWrapperLoss.style.display = 'flex'
+        const endScoreLoss = document.querySelector('#final-score-loss')
+        endScoreLoss.innerText = score
+      }
+    }, 500)
   }
 
   // ! Alien Rockets
@@ -370,14 +435,8 @@ function init() {
   }
 
   const start = document.querySelector('#start')
+  let alienRocketPosition
 
-
-  // explosion animation
-
-  function explosion() {
-    cells[playerPosition].classList.remove('explosion')
-    addPlayer(playerPosition)
-  }
   let alienRocketBegin
   function dropAlienRocket() {
     addAlien(alienStartingPosition)
@@ -386,6 +445,7 @@ function init() {
     const startbox = document.querySelector('#start-spiral')
     startbox.style.display = 'none'
     const alienRocketBegin = setInterval(() => {
+
       const randomIndex = Math.floor(Math.random() * (alienStartingPosition.length))
       let alienRocketPosition = currentPosition[randomIndex]
       addAlienRocket(alienRocketPosition)
@@ -401,8 +461,7 @@ function init() {
           clearInterval(alienRocketMovementInterval)
           removeAlienRocket(alienRocketPosition)
           removePlayer(playerPosition)
-          // cells[playerPosition].classList.add('explosion')
-          setTimeout(explosion(),500)
+          setTimeout(addPlayer(playerPosition),100)
         } else if (alienRocketPosition + width >= cellCount) {
           clearInterval(alienRocketMovementInterval)
           removeAlienRocket(alienRocketPosition)
@@ -413,21 +472,30 @@ function init() {
         }
         if (lives === 0) {
           endGame()
+          endGameWrapperLoss.style.display = 'flex'
+          const endScoreLoss = document.querySelector('#final-score-loss')
+          endScoreLoss.innerText = score
         }
-      }, 200)
+        // cells.forEach(cell => {
+        //   if (cell.classList.contains('barrier') && cell.classList.contains('alienRocket')) {
+        //     console.log('hitalien')
+        //     removeAlienRocket(alienRocketPosition)
+        //     removeBarrier(alienRocketPosition)
+        //     clearInterval(alienRocketMovementInterval)
+        //   }
+        // })
+      }, 100)
 
-    }, 5000)
+    }, 500)
 
   }
 
   // Event
   start.addEventListener('click', dropAlienRocket)
   start.addEventListener('click', swarmMovementIntervals)
-  start.addEventListener('click', playIntro)
+  start.addEventListener('click', playMain)
+  // start.addEventListener('click', barrierSet )
 }
-const introSound = document.querySelector('#intro-sound')
-function playIntro() {
-  introSound.play
-}
+
 
 window.addEventListener('DOMContentLoaded', init)
