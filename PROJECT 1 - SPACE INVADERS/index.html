@@ -19,15 +19,24 @@
         <div class='star four' ></div>
         <div class='star five' >
           <h1> SPACE INVADERS</h1>
-          <p> Greetings ambitious earthling, are you prepared <br /> to save your species from destruction? Move <br /> with the left and right arrows and shoot with<br />  the spacebar. Are you ready? </p>
+          <p id="greeting"> Greetings ambitious earthling, are you prepared to save your species from inihilation?<br /> Move  with the left and right arrows and shoot with the spacebar. <br /> Are you ready? </p>
           <button id="start"> YES</button>
         </div>
-        
       </div>
-      <div class = 'endGame-wrapper'>
+      <div id = 'endGame-wrapper-loss'>
         <div class = 'end-game'>
-          <button id="restart"> Play Again?</button>
-          <p> Score: <span id="final-score"></span> </p>
+          <div class="alien"></div>
+          <p class="alien-speaking"> º_º MUAJAJAJAJAJAJAJAJA YOU LOOOOOOSE ª_ª <br /> </p>
+          <p class="end-score"> Score: <span id="final-score-loss"></span> </p>
+          <button id="restart-loss"> Dare To Play Again?</button>
+        </div>
+      </div>
+      <div id = 'endGame-wrapper-win'>
+        <div class = 'end-game'>
+          <div class="alien"></div>
+          <p class="alien-speaking"> º_º well.....I suppose you win this time, fancy another go? Please? ª_ª <br /> </p>
+          <p class="end-score"> Score: <span id="final-score-win"></span> </p>
+          <button id="restart-win"> Dare To Play Again?</button>
         </div>
       </div>
     </section>
@@ -51,18 +60,8 @@
         <div class='star six' ></div>
         <p id="scorep"> Score : <br /> <span id='score'>0</span></p>
       </div>
-
-      <!-- <div id="score-div">
-      <p>
-        <h2>Score</h2>
-        <span id="score"></span>
-      </p>
-    </div>
-    <div id="lives-div">
-      <p>
-        <h2>Lives</h2>
-        <span id="lives"></span>
-      </p> -->
+      <audio id="intro-sound" src="https://soundcloud.com/tom-clegg-8/aliens?si=8b3560b97e804bed9f500756d912aee3&utm_source=clipboard&utm_medium=text&utm_campaign=social_sharing"></audio>
+      <audio id="main-sound" src="https://soundcloud.com/tom-clegg-8/attack-with-jazz?si=8b3560b97e804bed9f500756d912aee3&utm_source=clipboard&utm_medium=text&utm_campaign=social_sharing"></audio>
     </div>
   </body>
 </html>
