@@ -55,19 +55,17 @@ body {
   width: 5%;
 }
 
-.barrier {
+/* .barrier {
   background-image: url('https://i.imgur.com/eb6Je7w.png');
   background-repeat: no-repeat;
   background-size: contain;
-  cursor: pointer;
-}
+} */
 /* player image  */
 
 .spaceShip {
   background-image: url('https://i.imgur.com/btRpKhI.png');
   background-repeat: no-repeat;
   background-size: contain;
-  cursor: pointer;
   height: 150%;
 }
 
@@ -77,30 +75,22 @@ body {
   background-image: url('https://i.imgur.com/DnhvvaA.png');
   background-repeat: no-repeat;
   background-size: contain;
-  cursor: pointer;
 }
 
-.explosion {
-  background-image: url('https://i.imgur.com/0yPqwlw.jpg');
-  background-repeat: no-repeat;
-  background-size: contain;
-  cursor: pointer;
-}
+
+
 /* Alien Images*/
 
 .alien {
   background-image: url('https://i.imgur.com/qSTL5kW.png');
   background-repeat: no-repeat;
   background-size: contain;
-  cursor: pointer;
-  z-index:2;
 }
 
 .alienRocket {
   background-image: url('https://i.imgur.com/xkBLuzD.png');
   background-repeat: no-repeat;
   background-size: 50%;
-  cursor: pointer;
 }
 
 /* End Game */
@@ -129,7 +119,6 @@ body {
   background-image: url(https://i.imgur.com/qSTL5kW.png);
   background-repeat: repeat;
   background-size: 100px;
-  cursor: pointer;
   padding-top: 36px;
   align-content: center;
   flex-wrap: wrap;
@@ -138,7 +127,6 @@ body {
 
 #speaking-loss {
   padding: 10px;
-  /* margin-bottom: 25px; */
   height: 59px;
   margin-top: 0;
   margin-bottom: 44px;

@@ -87,3 +87,67 @@ function moveSwarm() {
 
   }
 }
+
+
+
+
+  function rocketFired(e) {
+    e.preventDefault()
+    if (e.keyCode === 32) {
+      // console.log(alienStartingPosition)
+      let rocketCurrentPosition = playerPosition - width
+      addRocket(rocketCurrentPosition)
+      const rocketInterval = setInterval(() => {
+        if (gameEnd) {
+          clearInterval(rocketInterval)
+        }
+        if (rocketHitsTop(rocketCurrentPosition) === false) {
+          removeRocket(rocketCurrentPosition)
+          rocketCurrentPosition -= width
+          addRocket(rocketCurrentPosition)
+          // alienHitByRocket(alienStartingPosition)
+
+        } else if (rocketHitsTop(rocketCurrentPosition)) {
+          removeRocket(rocketCurrentPosition)
+          clearInterval(rocketInterval)
+        }
+
+        // cells.forEach(cell => {
+        //   if (cell.classList.contains('barrier') && cell.classList.contains('rocket')) {
+        //     // console.log('hit')
+        //     // removeAlienRocket(alienRocketPosition)
+        //     removeBarrier(rocketCurrentPosition)
+        //     // clearInterval(alienRocketMovementInterval)
+        //     clearInterval(rocketInterval)
+        //     removeRocket(rocketCurrentPosition)
+        //   }
+        // })
+        cells.forEach(alienDead => {
+          if (alienDead.classList.contains('rocket') && alienDead.classList.contains('alien')) {
+            // console.log(alienDead)
+            alienDead.classList.remove('rocket')
+            alienDead.classList.remove('alien')
+            clearInterval(rocketInterval)
+            const alienKilled = currentPosition.filter(safe => {
+              return safe !== parseInt(alienDead.dataset.index)
+            })
+            // console.log(currentPosition)
+            currentPosition = alienKilled
+            // console.log(currentPosition)
+            score += 100
+            scoreBoard.innerHTML = score
+          }
+        })
+        // Player Win
+
+        if (score === parseInt(alienStartingPosition.length) * 100) {
+          // console.log('endgame')
+          endGame()
+          endGameWrapperWin.style.display = 'flex'
+          const endScore = document.getElementById('final-score-win')
+          endScore.innerText = score
+        }
+      }, 300)
+
+    }
+  }
