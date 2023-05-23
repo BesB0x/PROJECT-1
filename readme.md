@@ -240,6 +240,21 @@ Project Timing
 
 ## Final Project
 
+### Landing View
+
+![](https://res.cloudinary.com/detjuq0lu/image/upload/v1684859954/Project%201%20Readme/Screenshot_2023-05-23_at_17.35.23_wg5si0.png)
+
+### Gameplay
+
+![](https://res.cloudinary.com/detjuq0lu/image/upload/v1684859939/Project%201%20Readme/Screenshot_2023-05-23_at_17.35.33_npilat.png)
+
+### If you win
+
+![](https://res.cloudinary.com/detjuq0lu/image/upload/v1684859953/Project%201%20Readme/Screenshot_2023-05-23_at_17.36.07_mnt35m.png)
+
+### If you lose
+
+![](https://res.cloudinary.com/detjuq0lu/image/upload/v1684859950/Project%201%20Readme/Screenshot_2023-05-23_at_17.36.19_j51ucs.png)
 
 
 
