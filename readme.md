@@ -16,7 +16,7 @@ Requiremnents:
 * The players score should be displayed at the end of the game.
 
 ## Deployment
-<a href='https://besb0x.github.io/PROJECT-1/' > Fight The Space-Invaders</a>
+<a href='https://besb0x.github.io/PROJECT-1/' > Fight The Space-Invaders !</a>
 
 ## Timeframe
 
@@ -76,7 +76,7 @@ The project was spread over 5 days, where the fifth day ended at the project dea
 *  	For the Swarm, I simply used the index positions of the cells to map out three patterns of aliens, and then wrote a function that randomly decided which pattern would be used for that game.
 *  	I attached the intervals for alien movement, alien rocket fire, and some audio to the start button, and this function for the end games (where stopMain and playIntro refer to audio), which clears the game-grid, all intervals, and stops the music for the game, as well as playing the sound for between games.
 
-IMAGE
+<img src= 'https://res.cloudinary.com/detjuq0lu/image/upload/v1684846785/Project%201%20Readme/picture-1_gsyigq.png' />
 
 #### Swarm movement
  
