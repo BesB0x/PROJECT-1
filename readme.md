@@ -76,8 +76,7 @@ The project was spread over 5 days, where the fifth day ended at the project dea
 *  	For the Swarm, I simply used the index positions of the cells to map out three patterns of aliens, and then wrote a function that randomly decided which pattern would be used for that game.
 *  	I attached the intervals for alien movement, alien rocket fire, and some audio to the start button, and this function for the end games (where stopMain and playIntro refer to audio), which clears the game-grid, all intervals, and stops the music for the game, as well as playing the sound for between games.
 
-<img src= 'https://res.cloudinary.com/detjuq0lu/image/upload/v1684846785/Project%201%20Readme/picture-1_gsyigq.png' />
-
+![](https://res.cloudinary.com/detjuq0lu/image/upload/v1684846785/Project%201%20Readme/picture-1_gsyigq.png)
 #### Swarm movement
  
 My initial plan was to split this into two intervals: the first would send the swarm right until an alien hit the far right of the grid, at which point the interval would end and the aliens would be moved down the grid one cell. Then, a second interval would begin which moved the swarm left until an alien hit the far left. The interval would then stop, and the swarm would be moved down the grid one cell. This process would then repeat until an alien hit the bottom of the grid if there were no aliens left.
@@ -92,12 +91,12 @@ For the left side I used the some() method with a bang operator attached to it i
 #### Swarm Movement
 The function that sat within the interval was as follows:
 
-IMAGE
+![] (https://res.cloudinary.com/detjuq0lu/image/upload/v1684846785/Project%201%20Readme/picture-2_xi0q0l.png)
 
 The final stage was to put all of this functionality within a larger if statement that checks for the swarm hitting the bottom. When I began doing this I realised that I hadn’t thought hard enough about how I would make this process loop back to the start when the swarm had hit the far left and dropped down a cell. At this point I think I should’ve taken a step back and assessed whether I had over complicated the process (which I had). I had a feeling that I had, and that I could encompass the process into a single interval and if statement, however, I wanted to see if I could figure it out this way. The main thing I tried to do was to link the statements using Booleans, making a step not run until the step before had been completed as the prior step would switch a globally set Boolean from false to true. This did work right up to the most important transition - getting from the end of the process back to the start! I struggled with this for a while to no avail, so eventually went to my instructor for help, who suggested to me that yes you can make this work by using a single if statement and interval. As soon as Joe said that it clicked in my brain how it would work and I very quickly was able to adjust my code. My impression of this process was that I wasn’t confident enough in my ability at combining if statements and intervals, and so overcomplicated things and therefore missed what the actual problems were in my code. I assumed that using Booleans the way I had was not the right idea, where actually it was a matter of unnecessarily splitting the function up. As soon as I was assured that it can be done more simply, I was given the confidence to consider it and figure it out! I was then also able to see how my use of Booleans was correct. Below is the final code:
 
 
-IMAGE
+![](https://res.cloudinary.com/detjuq0lu/image/upload/v1684846785/Project%201%20Readme/picture-3_jgqsyo.png)
 
 #### Player Rockets
  
@@ -120,17 +119,17 @@ When spacebar is hit:
  However, I struggled with ensuring that multiple rockets fired wouldn’t interfere with their respective intervals. I realised early on that the problem to solve was how to allow the variable for the interval and the variable for the starting position to change its value each time they were called, so that when the spacebar is hit, a new interval is created, and it is created according to the new current position of the player. I simply couldn’t figure out how to make this happen! For the interval I tried putting in an if statement that checked for if the interval variable had already been created, and if not to define the variable. This didn’t work. I tried and tried and tried but this brick wall wasn’t budging. So I went to the instructor for guidance and he explained to me the vital importance of scope, and that was that! I have to say I expected to feel a little bit frustrated by how simple the fix was, but instead it was just massive satisfaction at fully understanding where I had gone wrong and how to change. This was a really big learning curve for me, and I now feel so much more confident with scope and also can appreciate how elegantly it can be used!
 With this implemented I was able to move smoothly through player rocket movement, and added on conditions for hitting aliens and adding points:
 
-IMAGE
+![](https://res.cloudinary.com/detjuq0lu/image/upload/v1684846786/Project%201%20Readme/picture-4_gffj2v.png)
 
 #### Alien Rockets
  
 With scope under my belt, coding the alien rockets went smoothly. The logic was pretty much identical apart from the fact that I had to set an interval for the execution of the function, and have it coming from a random place. Initially, I overcomplicated this process by using a forEach loop that looked like this:
 
-IMAGE
+![](https://res.cloudinary.com/detjuq0lu/image/upload/v1684846785/Project%201%20Readme/picture-5_xvtlng.png)
 
 This was another time when I felt as though this could be done differently, but I wanted to see this way through to the end. When I looked back later though, I did decide to refactor, to this:
 
-IMAGE
+![](https://res.cloudinary.com/detjuq0lu/image/upload/v1684847376/Project%201%20Readme/picture-6_cftuws.png)
 
 The major problem that occurred with the rocket movement was peculiar. I seemingly had all intervals working nicely and all rockets moving as they should, until I fired lots of rockets from the player, at which point the alien rocket intervals would start doubling each time a rock hit the top. This was very confusing and I struggled with it for a long time, eventually putting the problem down and working on other parts of the project. I returned to it with my instructor who realised that because I was using a start button to start the interval for the alien rockets, that button was focused and so clicked every time I hit the spacebar from that point. Checking the default behaviour of keys and other things like that will now be something I do every time from now on!
  
@@ -142,11 +141,11 @@ There were two collisions that I accounted for: a player rocket hitting an alien
  
 To detect this, within the interval moving the player rocket, I used a forEach loop to cycle through all the cells in the grid. If a cell has both player rocket class and alien class, both classes are removed and the player rocket interval is cleared. Then I called a variable that used the filter method to remove the hit alien from the array of aliens in the swarm, and then added added 100 to the player score:
 
-IMAGE
+![](https://res.cloudinary.com/detjuq0lu/image/upload/v1684846785/Project%201%20Readme/picture-7_ovwkwf.png)
 
 ##### Alien rocket hitting player
 
-IMAGE
+![](https://res.cloudinary.com/detjuq0lu/image/upload/v1684846785/Project%201%20Readme/picture-8_x1fe0a.png)
 
 If player and alien rocket are in the same cell, take a life off, clear alien rocket interval, remove both alien and player from the cell and then 100ms later add the player back (to show that the player was hit).
  
@@ -178,7 +177,7 @@ The player, alien, and rocket icons
  
 I had a lot of fun with this. I’ve previously experimented with Processing 4 using Java to make very harsh , basic patterns and shapes with triangles, rectangles, and squares, so I did the same here! The vast majority of the work was creating a large amounts of triangles or whatever shape and decreasing or increasing one x or y value by 5 or 10 to create a sort of cascading effect. I then used this strange quirk whereby if you assign a negative value to the stroke it gives you a colour instead of a shade of grey. You can sort of predict what colour you’ll get, but not really, so there was a lot of trial and error, but it throws up really unpredictable and interesting colour combinations! Below is a snippet for the spaceship’s code:
 
-IMAGE
+![](https://res.cloudinary.com/detjuq0lu/image/upload/v1684846785/Project%201%20Readme/picture-9_s3nfuy.png)
 
 ### Sound
  
