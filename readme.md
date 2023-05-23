@@ -49,25 +49,25 @@ Before starting, I broke the project down into three parts: rocket movement, ali
 The project was spread over 5 days, where the fifth day ended at the project deadline of 2pm :
  
  
-Day 1
-*   	Implemented basic HTML and CSS.
-*   	Completed player movement.
-*   	Began player rocket movement.
-*   	Did a small amount of swarm movement, but moved away from it.
-Day 2
-*   	Completed collisions.
-*   	Continued with rocket fire, moving into alien rockets.
-Day 3
-*   	UI – advanced CSS and HTML work.
-*   	Swarm movement.
-Day 4
-*   	Start and end game procedures.
-*   	Building the player, alien, and rockets in Processing 4.
-*   	Sound.
-*   	Bug fixing.
-Day 5
-*   	Attempted to do barriers.
-*   	Created alien setups.
+#### Day 1
+*   Implemented basic HTML and CSS.
+*   Completed player movement.
+*   Began player rocket movement.
+*   Did a small amount of swarm movement, but moved away from it.
+#### Day 2
+*   Completed collisions.
+*   Continued with rocket fire, moving into alien rockets.
+#### Day 3
+*   UI – advanced CSS and HTML work.
+*   Swarm movement.
+#### Day 4
+*   Start and end game procedures.
+*   Building the player, alien, and rockets in Processing 4.
+*   Sound.
+*   Bug fixing.
+#### Day 5
+*   Attempted to do barriers.
+*   Created alien setups.
 
 ### Basic setup
  
@@ -108,12 +108,12 @@ When spacebar is hit:
 2. 	Set Interval
 3. 	If the game is over:
 
-  * 	Clear interval
+  * Clear interval
 4. 	If the rocket hasn’t hit the top of the grid (if its current position is greater than or equal to width of the grid):
-  * 	Move
+  * Move
 5. 	Else :
-  * 	Remove rocket
-  * 	Clear interval
+  * Remove rocket
+  * Clear interval
  
  
  
@@ -154,10 +154,10 @@ If player and alien rocket are in the same cell, take a life off, clear alien ro
 ### Front-End
  
 In terms of the visual element and user experience of the game there were a few key points:
-*   	The design of the page – background, grid.
-*   	Start/end-game visuals.
-*   	The player, alien, and rocket icons.
-*   	Sound.
+*   The design of the page – background, grid.
+*   Start/end-game visuals.
+*   The player, alien, and rocket icons.
+*   Sound.
  
 I decided to personalise each part.
  
@@ -190,15 +190,15 @@ I’m a musician so I was keen to make my own sound for this project, which was 
 
 ### Scope
  
-*   	I struggled with ensuring that multiple rockets fired wouldn’t interfere with their respective intervals.
+*   I struggled with ensuring that multiple rockets fired wouldn’t interfere with their respective intervals.
   *    I realised early on that the problem to solve was how to allow the variable for the interval and the variable for the starting position to change its value each time they were called, so that when the spacebar is hit, a new interval is created, and it is created according to the new current position of the player
  
-*   	It was a really good lesson in understanding scope. Once I had this, It was so satisfying fully understanding where I had gone wrong and how to change. This was a really big learning curve for me, and I now feel so much more confident with scope and also can appreciate how elegantly it can be used!
+*   It was a really good lesson in understanding scope. Once I had this, It was so satisfying fully understanding where I had gone wrong and how to change. This was a really big learning curve for me, and I now feel so much more confident with scope and also can appreciate how elegantly it can be used!
  
  
 ### Focussing problem
  
-*   	When coding the rocket movement, I had a problem where if I fired lots of  rockets from the player,  the alien rocket intervals would start doubling. This was very confusing and I struggled with it for a long time, eventually putting the problem down and working on other parts of the project. I returned to it with my instructor who eventually realised that because I was using a start button to start the interval for the alien rockets, that button was focused and so clicked every time I hit the spacebar from that point. Checking the default behaviour of keys and other things like that will now be something I do every time from now on!
+*   When coding the rocket movement, I had a problem where if I fired lots of  rockets from the player,  the alien rocket intervals would start doubling. This was very confusing and I struggled with it for a long time, eventually putting the problem down and working on other parts of the project. I returned to it with my instructor who eventually realised that because I was using a start button to start the interval for the alien rockets, that button was focused and so clicked every time I hit the spacebar from that point. Checking the default behaviour of keys and other things like that will now be something I do every time from now on!
  
  
 ### Looping the Swarm Movement
@@ -234,10 +234,10 @@ Project Timing
 
 ## Future Improvements
 
-*       I’d add barriers.
-*   	I’d make it so that if player and alien rockets collide the two are destroyed.
-*   	Animations for alien or player death.
-*   	Have it so that occasionally fruits would appear for the player eat, which would change the game mode, changing visual style, rocket power, and alien movement, and the music. Maybe one that slows the aliens down and makes player rockets less powerful, and one where it does the opposite.
+*  I’d add barriers.
+*   I’d make it so that if player and alien rockets collide the two are destroyed.
+*   Animations for alien or player death.
+*   Have it so that occasionally fruits would appear for the player eat, which would change the game mode, changing visual style, rocket power, and alien movement, and the music. Maybe one that slows the aliens down and makes player rockets less powerful, and one where it does the opposite.
 
 ## Final Project
 
